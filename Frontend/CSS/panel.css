@@ -1,0 +1,108 @@
+   :root {
+      --verde: #9bc97f;
+      --verde-oscuro: #6ea35a;
+      --crema: #f9f9f4;
+      --blanco: #fff;
+      --negro-suave: #2c2c2c;
+    }
+
+    body {
+      min-height: 100vh;
+      background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+                  url('/Frontend/img/fondo.jpg') no-repeat center center fixed;
+      background-size: cover;
+      font-family: 'Segoe UI', sans-serif;
+      color: var(--negro-suave);
+    }
+
+    .navbar {
+      background-color: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(6px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .navbar-brand {
+      font-weight: bold;
+      color: var(--verde-oscuro);
+    }
+
+    .btn-menu {
+      background-color: var(--verde);
+      border: none;
+      color: white;
+    }
+    .btn-menu:hover {
+      background-color: var(--verde-oscuro);
+    }
+
+    .offcanvas {
+      background-color: var(--crema);
+    }
+
+    .offcanvas-header {
+      border-bottom: 1px solid #e0e0e0;
+    }
+
+    .offcanvas-body .nav-link {
+      display: flex;
+      align-items: center;
+      font-weight: 500;
+      gap: 0.75rem;
+      padding: 0.75rem 1rem;
+      color: #333;
+      border-radius: 0.75rem;
+    }
+
+    .offcanvas-body .nav-link:hover,
+    .offcanvas-body .nav-link.active {
+      background-color: var(--verde);
+      color: white;
+    }
+
+    .offcanvas-body .nav-link i {
+      font-size: 1.2rem;
+    }
+
+    main {
+      padding-top: 6rem;
+    }
+
+    .logo {
+      width: 120px;
+      margin-bottom: 1rem;
+    }
+
+    .card-panel {
+      max-width: 950px;
+      margin: auto;
+      border-radius: 1.5rem;
+      padding: 3rem 2rem;
+      background: rgba(255, 255, 255, 0.96);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+    }
+
+    /* Botones como imágenes */
+    .btn-nivel {
+      width: 100%;
+      max-width: 200px;
+      transition: transform 0.2s ease-in-out, filter 0.3s ease-in-out;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .btn-nivel:hover {
+      transform: scale(1.05);
+      filter: brightness(1.1);
+    }
+
+    .alert {
+      background-color: #f0fdf4;
+      border-left: 4px solid var(--verde);
+      color: #2d6a4f;
+    }
+
+    @media (max-width: 576px) {
+      .card-panel {
+        padding: 2rem 1rem;
+      }
+    }

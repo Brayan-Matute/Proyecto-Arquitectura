@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Michi Match — Verificar código</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<style>
+  body{background:#eaffd5;min-height:100vh;display:flex;align-items:center;justify-content:center;font-family:Inter,system-ui,Segoe UI,Roboto}
+  .card-auth{background:#fff;border-radius:1rem;box-shadow:0 10px 30px rgba(0,0,0,.15);padding:2rem;max-width:420px;width:100%}
+</style>
+</head>
+<body>
+  <div class="card-auth">
+    <h4 class="text-success text-center mb-2">Verificación de cuenta</h4>
+    <p class="text-muted small text-center">Ingresa el código de 6 dígitos que te enviamos por correo.</p>
+    <div id="msg" class="alert d-none" role="alert"></div>
+    <form id="formVerify" class="mb-2">
+      <input id="codigo" class="form-control form-control-lg text-center" placeholder="######" maxlength="6" required>
+      <button class="btn btn-success w-100 mt-3" type="submit">Verificar</button>
+    </form>
+
+    <button id="btnReenviar" class="btn btn-outline-secondary w-100">Reenviar código</button>
+  </div>
+
+<script type="module" src="/Frontend/JS/VerificarUsuario.js"></script>
+</body>
+</html>

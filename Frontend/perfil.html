@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Perfil del Jugador — Michi Match</title>
+
+  <!-- Bootstrap & Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Firebase -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
+    import { getAuth, updatePassword, updateProfile, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
+    import { getFirestore, doc, updateDoc } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyAipEqvrKnyj0obYcu-WKgRLzEAEqlG0jg",
+      authDomain: "login-arquitectura.firebaseapp.com",
+      projectId: "login-arquitectura",
+      storageBucket: "login-arquitectura.appspot.com",
+      messagingSenderId: "546770055389",
+      appId: "1:546770055389:web:3b9fdff53e1d258520eb34"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    onAuthStateChanged(auth, (user) => {
+      if (!user) window.location.href = "/Frontend/login.html";
+    });
+
+    window.auth = auth;
+    window.updatePassword = updatePassword;
+    window.updateProfile = updateProfile;
+    window.db = db;
+  </script>
+
+  <link rel="stylesheet" href="/Frontend/CSS/perfil.css">
+</head>
+
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container-fluid">
+      <button class="btn btn-menu me-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu">
+        <i class="bi bi-list"></i>
+      </button>
+      <a class="navbar-brand" href="#">Michi Match</a>
+      <div class="ms-auto me-3 text-muted">
+        <i class="bi bi-person-circle me-1"></i> <span id="navUserName">Jugador</span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Sidebar -->
+  <div class="offcanvas offcanvas-start" tabindex="-1" id="sidebarMenu">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title"><i class="bi bi-controller me-2"></i>Menú Michi</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+    </div>
+    <div class="offcanvas-body">
+      <nav class="nav flex-column">
+        <a href="/Frontend/panel.html" class="nav-link"><i class="bi bi-house-door-fill"></i>Inicio</a>
+        <a href="/Frontend/perfil.html" class="nav-link active"><i class="bi bi-person"></i>Perfil</a>
+        <a href="/Frontend/TablaRanking.html" class="nav-link"><i class="bi bi-bar-chart"></i>Tabla Ranking</a>
+        <hr>
+        <a href="#" class="nav-link text-danger" id="btnSalir"><i class="bi bi-box-arrow-right"></i>Salir</a>
+      </nav>
+    </div>
+  </div>
+
+  <!-- Contenido Principal -->
+  <main class="container py-5">
+    <div class="profile-card text-center">
+      <div class="icon-wrapper mb-3">
+        <img id="animalIcon" class="animal-img" src="" alt="Ícono de animal">
+      </div>
+
+      <h3 id="nombreJugador" class="fw-bold text-dark mb-0">Jugador</h3>
+      <p id="correoJugador" class="text-secondary small mb-3">correo@example.com</p>
+
+      <div class="d-flex justify-content-center gap-2 mb-4">
+        <button class="btn btn-outline-success btn-sm" data-bs-toggle="modal" data-bs-target="#modalNombre">
+          <i class="bi bi-pencil-square me-1"></i> Cambiar nombre
+        </button>
+        <button class="btn btn-outline-warning btn-sm" data-bs-toggle="modal" data-bs-target="#modalPassword">
+          <i class="bi bi-shield-lock me-1"></i> Cambiar contraseña
+        </button>
+      </div>
+
+      <div class="stats-container text-start">
+        <div class="stat-item"><span class="label">Victorias:</span><span id="victorias" class="value">0</span></div>
+        <div class="stat-item"><span class="label">Derrotas:</span><span id="derrotas" class="value">0</span></div>
+        <div class="stat-item"><span class="label">Partidas Jugadas:</span><span id="partidas" class="value">0</span></div>
+        <div class="stat-item"><span class="label">Promedio de Tiempo:</span><span id="promedio" class="value">0 s</span></div>
+        <div class="stat-item"><span class="label">Nivel más jugado:</span><span id="nivel" class="value">—</span></div>
+      </div>
+
+      <div class="mt-4">
+        <button id="logoutBtn" class="btn btn-outline-dark px-4">
+          <i class="bi bi-box-arrow-right me-2"></i>Cerrar Sesión
+        </button>
+      </div>
+    </div>
+  </main>
+
+  <!-- 🟢 Modal Cambiar Nombre -->
+  <div class="modal fade" id="modalNombre" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header bg-success text-white">
+          <h5 class="modal-title"><i class="bi bi-pencil-square me-2"></i>Cambiar nombre</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <label class="form-label fw-semibold">Nuevo nombre</label>
+          <input type="text" id="nuevoNombre" class="form-control" placeholder="Ingresa tu nuevo nombre">
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button class="btn btn-success" id="guardarNombre">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 🟡 Modal Cambiar Contraseña -->
+  <div class="modal fade" id="modalPassword" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header bg-warning text-dark">
+          <h5 class="modal-title"><i class="bi bi-shield-lock me-2"></i>Cambiar contraseña</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <label class="form-label fw-semibold">Nueva contraseña</label>
+          <div class="password-wrapper mb-3">
+            <input type="password" id="nuevaPass" class="form-control" placeholder="Mínimo 6 caracteres">
+            <button type="button" class="toggle-pass" id="toggleNew"><i class="bi bi-eye"></i></button>
+          </div>
+
+          <label class="form-label fw-semibold">Confirmar contraseña</label>
+          <div class="password-wrapper">
+            <input type="password" id="confirmPass" class="form-control" placeholder="Confirma tu contraseña">
+            <button type="button" class="toggle-pass" id="toggleConfirm"><i class="bi bi-eye"></i></button>
+          </div>
+          <div id="msgPass" class="small text-danger mt-2 d-none">Las contraseñas no coinciden.</div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button class="btn btn-warning" id="guardarPass">Actualizar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+   <script src="/Frontend/JS/perfil.js"></script>
+
+
+  <script type="module"  src="/Frontend/JS/EditarPerfil.js"> </script>
+</body>
+</html>

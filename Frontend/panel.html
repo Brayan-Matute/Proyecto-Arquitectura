@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Michi Match — Panel Principal</title>
+
+  <!-- Bootstrap 5 y Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="stylesheet" href="/Frontend/CSS/panel.css">
+
+</head>
+
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container-fluid">
+      <button class="btn btn-menu me-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu">
+        <i class="bi bi-list"></i>
+      </button>
+      <a class="navbar-brand" href="#">Michi Match</a>
+      <div class="ms-auto me-3 text-muted">
+        <i class="bi bi-person-circle me-1"></i> <span id="navUserName">Jugador</span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Sidebar -->
+  <div class="offcanvas offcanvas-start" tabindex="-1" id="sidebarMenu">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title"><i class="bi bi-controller me-2"></i>Menú Michi</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+    </div>
+    <div class="offcanvas-body">
+      <nav class="nav flex-column">
+        <a href="/Frontend/panel.html" class="nav-link active"><i class="bi bi-house-door-fill"></i>Inicio</a>
+        <a href="/Frontend/perfil.html" class="nav-link"><i class="bi bi-person"></i>Perfil</a>
+        <a href="/Frontend/TablaRanking.html" class="nav-link">
+          <i class="bi bi-bar-chart"></i>Tabla Ranking
+        </a>
+
+        <hr>
+        <a href="#" class="nav-link text-danger" id="btnSalir"><i class="bi bi-box-arrow-right"></i>Salir</a>
+      </nav>
+    </div>
+  </div>
+
+  <!-- Contenido Principal -->
+  <main class="container">
+    <div class="card-panel text-center">
+      <img src="/Frontend/img/APP-01.png" class="logo" alt="Michi Match">
+      <h2 class="fw-bold text-success">Bienvenido a Michi Match, <span id="welcomeName">Jugador</span> 👋</h2>
+      <p class="text-muted mb-4">Elige la dificultad para comenzar una partida.</p>
+
+      <!-- Botones con imágenes -->
+      <div class="row g-4 justify-content-center">
+        <div class="col-12 col-md-4">
+          <img src="/Frontend/img/facil.png" alt="Fácil" class="btn-nivel" data-level="facil">
+        </div>
+        <div class="col-12 col-md-4">
+          <img src="/Frontend/img/medio.png" alt="Medio" class="btn-nivel" data-level="medio">
+        </div>
+        <div class="col-12 col-md-4">
+          <img src="/Frontend/img/dificil.png" alt="Difícil" class="btn-nivel" data-level="dificil">
+        </div>
+      </div>
+
+      <div id="msg" class="alert d-none mt-4" role="alert"></div>
+    </div>
+  </main>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Audio invisible -->
+<audio id="audioIntro" src="/Frontend/cartas-frontal/game_1mn12s_130bpm_STD.wav" preload="auto"></audio>
+
+<script>
+  // Verificar sesión iniciada
+  const nombre = localStorage.getItem('nombre_usuario');
+  if (!nombre) {
+    window.location.href = "/Frontend/login.html";
+  }
+
+  // Mostrar nombre
+  document.getElementById('welcomeName').textContent = nombre;
+  document.getElementById('navUserName').textContent = nombre;
+
+  // Botones de nivel
+  document.querySelectorAll('.btn-nivel').forEach(img => {
+    img.addEventListener('click', () => {
+      const nivel = img.dataset.level;
+
+      // Guardar nivel y marcar que la música fue iniciada
+      localStorage.setItem("nivel_juego", nivel);
+      localStorage.setItem("musica_iniciada", "true");
+
+      const audio = document.getElementById("audioIntro");
+      audio.volume = 0.5;
+      audio.loop = true;
+
+      audio.play().then(() => {
+        setTimeout(() => {
+          window.location.href = "/Frontend/Tablero.html";
+        }, 300); // pequeña espera para no cortar el audio
+      }).catch(() => {
+        window.location.href = "/Frontend/Tablero.html";
+      });
+    });
+  });
+
+  // Cerrar sesión
+  document.getElementById('btnSalir').addEventListener('click', () => {
+    localStorage.clear();
+    window.location.href = "/Frontend/login.html";
+  });
+</script>
+
+
+</body>
+
+</html>

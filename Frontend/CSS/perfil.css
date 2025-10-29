@@ -1,0 +1,161 @@
+ :root {
+      --verde: #9bc97f;
+      --verde-oscuro: #6ea35a;
+      --crema: #f9f9f4;
+      --blanco: #fff;
+      --negro-suave: #2c2c2c;
+    }
+
+    body {
+      min-height: 100vh;
+      background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+        url('/Frontend/img/fondo.jpg') no-repeat center center fixed;
+      background-size: cover;
+      font-family: 'Segoe UI', sans-serif;
+      color: var(--negro-suave);
+    }
+
+    .navbar {
+      background-color: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(6px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .navbar-brand {
+      font-weight: bold;
+      color: var(--verde-oscuro);
+    }
+
+    .btn-menu {
+      background-color: var(--verde);
+      border: none;
+      color: white;
+    }
+
+    .btn-menu:hover {
+      background-color: var(--verde-oscuro);
+    }
+
+    .offcanvas {
+      background-color: var(--crema);
+    }
+
+    .offcanvas-header {
+      border-bottom: 1px solid #e0e0e0;
+    }
+
+    .offcanvas-body .nav-link {
+      display: flex;
+      align-items: center;
+      font-weight: 500;
+      gap: 0.75rem;
+      padding: 0.75rem 1rem;
+      color: #333;
+      border-radius: 0.75rem;
+    }
+
+    .offcanvas-body .nav-link:hover,
+    .offcanvas-body .nav-link.active {
+      background-color: var(--verde);
+      color: white;
+    }
+
+    .offcanvas-body .nav-link i {
+      font-size: 1.2rem;
+    }
+
+    main {
+      padding-top: 8rem;
+      /* antes 6rem */
+      padding-bottom: 3rem;
+    }
+
+    .profile-card {
+      background: #ffffff;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+      max-width: 420px;
+      margin: auto;
+      padding: 2rem;
+      margin-top: 2rem; 
+      color: #333;
+    }
+
+    .icon-wrapper {
+      width: 120px;
+      height: 120px;
+      background: #eaf7e3;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 3px solid #8bd33b;
+      margin: auto;
+    }
+
+    .animal-img {
+      width: 64px;
+      height: 64px;
+    }
+
+    .stats-container {
+      background: #f6fff0;
+      border: 1px solid #d7ebc5;
+      border-radius: 14px;
+      padding: 1rem;
+      margin-top: 1rem;
+    }
+
+    .stat-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid #e6eed9;
+    }
+
+    .stat-item:last-child {
+      border-bottom: none;
+    }
+
+    .label {
+      color: #555;
+      font-size: 0.95rem;
+    }
+
+    .value {
+      font-weight: 600;
+      color: #222;
+    }
+
+    .btn-outline-dark {
+      border-radius: 10px;
+      transition: all 0.3s ease;
+    }
+
+    .btn-outline-dark:hover {
+      background-color: #8bd33b;
+      color: #fff;
+      transform: scale(1.05);
+    }
+
+    /* 🔒 Estilo del botón de mostrar contraseña */
+.toggle-pass {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  color: #555;
+  cursor: pointer;
+  z-index: 3;
+  transition: color 0.2s ease;
+}
+
+.toggle-pass:hover {
+  color: #000;
+}
+
+.password-wrapper {
+  position: relative;
+}

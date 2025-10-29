@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Michi Match — Login</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="stylesheet" href="/Frontend/CSS/estilologin.css">
+</head>
+
+<body>
+  <div class="card-auth">
+    <img src="/Frontend/img/APP-01.png" class="logo" alt="Michi Match">
+    <h4>¡Iniciar sesión!</h4>
+
+    <div id="msg" class="alert d-none" role="alert"></div>
+
+    <form id="formLogin" novalidate>
+      <div class="mb-3 text-start">
+        <label class="form-label fw-semibold" for="email">Usuario o Correo</label>
+        <div class="input-group">
+          <span class="input-group-text"><i class="bi bi-at"></i></span>
+          <input id="email" type="text" class="form-control" placeholder="Ingrese su usuario o correo" required>
+        </div>
+      </div>
+
+      <div class="mb-1 text-start">
+        <label class="form-label fw-semibold" for="password">Contraseña</label>
+        <div class="input-group">
+          <span class="input-group-text"><i class="bi bi-shield-lock"></i></span>
+          <input id="password" type="password" class="form-control" placeholder="Ingrese la contraseña" minlength="6"
+            required>
+          <button type="button" class="toggle-pass" id="togglePass"><i class="bi bi-eye"></i></button>
+        </div>
+      </div>
+
+      <a href="#" id="linkReset" class="link small">¿Olvidaste la contraseña?</a>
+
+      <div class="d-grid mt-3">
+        <button class="btn btn-accent" id="btnLogin" type="submit">
+          <span class="spinner-border spinner-border-sm me-2 d-none" id="spin"></span>
+          Entrar
+        </button>
+      </div>
+
+      <div class="mt-3">¿No tienes cuenta? <a class="link" href="/Frontend/Registrar.html">Regístrate</a></div>
+
+      <div id="verifyBox" class="mt-3 d-none">
+        <p class="text-danger fw-semibold mb-2">Tu cuenta no está verificada por código.</p>
+        <button class="btn btn-outline-danger btn-sm" type="button" id="btnGoVerify">Tengo un código</button>
+      </div>
+    </form>
+    <br>
+     <p class="footer">© Michi Match 2025</p>
+  </div>
+
+ <script  type="module" src="/Frontend/JS/Login.js"></script>
+</body>
+
+</html>
