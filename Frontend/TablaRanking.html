@@ -103,6 +103,7 @@
                 <a href="/Frontend/TablaRanking.html" class="nav-link active">
                     <i class="bi bi-bar-chart"></i>Tabla Ranking
                 </a>
+                <a href="/Frontend/Informacion.html" class="nav-link"><i class="bi bi-info-circle"></i>Informacion</a>
                 <hr>
                 <a href="#" class="nav-link text-danger" id="btnSalir"><i class="bi bi-box-arrow-right"></i>Salir</a>
             </nav>
@@ -123,7 +124,7 @@
 
         document.getElementById('navUserName').textContent = nombre;
 
-        fetch("http://31.97.139.53:3000/ranking/")
+        fetch("https://eberaplicano.com/michi/ranking/")
             .then(res => res.json())
             .then(data => {
                 const contenedor = document.getElementById('rankingLista');

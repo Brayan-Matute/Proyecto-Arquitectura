@@ -69,7 +69,7 @@ f.addEventListener('submit', async (e) => {
     }
 
     // 🔥 Solicitud a tu API Django para obtener más datos
-    const res = await fetch("http://31.97.139.53:3000/login/", {
+    const res = await fetch("https://eberaplicano.com/michi/login/", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ nombre_usuario: correoLogin, contrasena: pass.value })
@@ -84,8 +84,9 @@ f.addEventListener('submit', async (e) => {
     localStorage.setItem('userId', data.usuario.id);                     // ID para stats
     localStorage.setItem('token', await user.getIdToken());
 
-    // Redirigir
-    window.location.href = '/Frontend/panel.html';
+    // Mostrar pantalla de carga antes del panel
+    window.location.href = '/Frontend/cargando_login.html';
+
 
   } catch (err) {
     console.error(err);

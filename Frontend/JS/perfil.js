@@ -18,7 +18,7 @@ document.getElementById('logoutBtn').addEventListener('click', () => {
 
 async function cargarPerfil(idJugador) {
   try {
-    const res = await fetch(`http://31.97.139.53:3000/jugadores/${idJugador}/stats/`);
+    const res = await fetch(`https://eberaplicano.com/michi/jugadores/${idJugador}/stats/`);
     if (!res.ok) throw new Error(`Error ${res.status}`);
     const data = await res.json();
 
@@ -52,3 +52,37 @@ function elegirIconoAleatorio() {
     localStorage.clear();
     window.location.href = "/Frontend/login.html";
   });
+
+  // 🟢 Abrir historial de partidas
+document.getElementById("btnHistorial").addEventListener("click", async () => {
+  const userId = localStorage.getItem("userId");
+  const tabla = document.getElementById("tablaHistorial");
+  tabla.innerHTML = `<tr><td colspan="5" class="text-muted">Cargando partidas...</td></tr>`;
+
+  try {
+    const res = await fetch(`https://eberaplicano.com/michi/partidas/${userId}/`);
+    if (!res.ok) throw new Error(`Error ${res.status}`);
+    const data = await res.json();
+
+    if (!data.length) {
+      tabla.innerHTML = `<tr><td colspan="5" class="text-muted">No hay partidas registradas aún.</td></tr>`;
+      return;
+    }
+
+    tabla.innerHTML = data.map((p, i) => `
+      <tr>
+        <td>${i + 1}</td>
+        <td class="${p.resultado === 'Victoria' ? 'text-success fw-bold' : 'text-danger fw-bold'}">${p.resultado}</td>
+        <td>${p.nivel}</td>
+        <td>${parseFloat(p.tiempo).toFixed(2)}</td>
+        <td>${new Date(p.fecha).toLocaleString('es-ES')}</td>
+      </tr>
+    `).join('');
+  } catch (err) {
+    console.error(err);
+    tabla.innerHTML = `<tr><td colspan="5" class="text-danger">Error al cargar el historial.</td></tr>`;
+  }
+
+  const modal = new bootstrap.Modal(document.getElementById('modalHistorial'));
+  modal.show();
+});

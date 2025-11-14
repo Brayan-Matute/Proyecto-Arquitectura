@@ -68,7 +68,7 @@ document.getElementById('guardarNombre').addEventListener('click', async () => {
   if (!nuevoNombre) return mostrarToast("Ingresa un nombre válido", "warning");
 
   try {
-    const res = await fetch(`http://31.97.139.53:3000/jugadores/${userId}/editar/`, {
+    const res = await fetch(`https://eberaplicano.com/michi/jugadores/${userId}/editar/`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ nombre_usuario: nuevoNombre })
@@ -105,7 +105,7 @@ document.getElementById('guardarPass').addEventListener('click', async () => {
   if (nueva !== confirm) return mostrarToast("Las contraseñas no coinciden", "warning");
 
   try {
-    const res = await fetch(`http://31.97.139.53:3000/jugadores/${userId}/editar/`, {
+    const res = await fetch(`https://eberaplicano.com/michi/jugadores/${userId}/editar/`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ contrasena: nueva })

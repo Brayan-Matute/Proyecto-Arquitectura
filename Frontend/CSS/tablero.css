@@ -18,7 +18,7 @@ body::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.35); /* Oscurece un poco la imagen */
+  background: rgba(0, 0, 0, 0.35);
   z-index: 0;
 }
 
@@ -26,7 +26,6 @@ body::before {
   position: relative;
   z-index: 1;
 }
-
 
 /* 🎴 Tablero */
 .board {
@@ -47,20 +46,24 @@ body::before {
   cursor: pointer;
   transition: opacity 0.5s ease;
 }
+
 .card-container.hidden {
   opacity: 0;
   pointer-events: none;
 }
+
 .card {
   width: 100px;
-  height: 115px;
+  height: 105px;
   position: relative;
   transform-style: preserve-3d;
   transition: transform 0.6s;
 }
+
 .card.flipped {
   transform: rotateY(180deg);
 }
+
 .card-face {
   position: absolute;
   width: 100%;
@@ -73,12 +76,14 @@ body::before {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   overflow: hidden;
 }
+
 .card-face img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   border-radius: 12px;
 }
+
 .back {
   transform: rotateY(180deg);
 }
@@ -91,6 +96,7 @@ body::before {
   transform: translateX(-50%);
   z-index: 10;
 }
+
 .contador-box {
   background: linear-gradient(180deg, #a35ee6 0%, #7b32b6 100%);
   color: white;
@@ -98,7 +104,7 @@ body::before {
   font-weight: 700;
   border-radius: 40px;
   padding: 10px 40px;
-  box-shadow: 0 6px 0 #51207c, 0 8px 12px rgba(0,0,0,0.3);
+  box-shadow: 0 6px 0 #51207c, 0 8px 12px rgba(0, 0, 0, 0.3);
   border: 4px solid #e6c59b;
   font-family: 'Comic Sans MS', 'Fredoka One', cursive;
   letter-spacing: 1px;
@@ -106,9 +112,10 @@ body::before {
   text-align: center;
   transition: transform 0.2s ease, box-shadow 0.3s ease;
 }
+
 .contador-box:hover {
   transform: scale(1.05);
-  box-shadow: 0 8px 0 #3e0b64, 0 10px 15px rgba(0,0,0,0.4);
+  box-shadow: 0 8px 0 #3e0b64, 0 10px 15px rgba(0, 0, 0, 0.4);
 }
 
 /* 🎵 Música + 💥 Intentos */
@@ -148,15 +155,18 @@ body::before {
   cursor: pointer;
   transition: all 0.2s ease;
 }
+
 .music-btn:hover {
   transform: scale(1.05);
   box-shadow: 0 6px 0 #3e0b64, 0 8px 12px rgba(0, 0, 0, 0.3);
 }
+
 .music-btn.off {
   background: linear-gradient(180deg, #b54d4d 0%, #8b2525 100%);
   box-shadow: 0 5px 0 #551414;
 }
 
+/* 🔙 Botón volver */
 .volver-superior {
   position: absolute;
   top: 15px;
@@ -183,11 +193,82 @@ body::before {
   box-shadow: 0 6px 0 #6e4300, 0 8px 12px rgba(0, 0, 0, 0.3);
 }
 
-@media (max-width: 500px) {
+/* 🔔 Toast */
+.toast {
+  transform: translateX(20px);
+  opacity: 0;
+  animation: toastSlideIn 0.4s ease forwards;
+}
+
+@keyframes toastSlideIn {
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* 📱 Ajuste responsive — mantener 4 columnas con tamaño fluido */
+.board {
+  grid-template-columns: repeat(4, minmax(clamp(65px, 10vw, 120px), 1fr));
+  gap: clamp(6px, 1.2vw, 12px);
+  max-width: min(95vw, 520px);
+}
+
+.card {
+  width: 100%;
+  aspect-ratio: 0.87;
+}
+
+/* Contenedor general */
+.game-container {
+  width: 100%;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  padding-bottom: 2rem;
+}
+
+/* 📲 Ajustes por tamaño de pantalla */
+@media (max-width: 768px) {
+  .board {
+    max-width: 90vw;
+  }
+
+  .contador-box {
+    font-size: clamp(14px, 3vw, 18px);
+    padding: 8px 25px;
+  }
+
   .music-control {
     flex-direction: column;
-    gap: 10px;
-    justify-content: center;
     align-items: center;
+    gap: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .board {
+    max-width: 95vw;
+    gap: 6px;
+  }
+
+  .contador-box {
+    font-size: 13px;
+    padding: 6px 20px;
+  }
+
+  .intentos-box,
+  .music-btn {
+    font-size: 12px;
+    padding: 8px 18px;
+  }
+
+  .volver-btn {
+    font-size: 10px;
+    padding: 6px 15px;
   }
 }
