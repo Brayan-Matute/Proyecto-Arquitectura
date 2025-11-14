@@ -53,23 +53,37 @@ function elegirIconoAleatorio() {
     window.location.href = "/Frontend/login.html";
   });
 
-  // 🟢 Abrir historial de partidas
+
+  // 🟢 Ver historial de partidas
 document.getElementById("btnHistorial").addEventListener("click", async () => {
   const userId = localStorage.getItem("userId");
   const tabla = document.getElementById("tablaHistorial");
+  const resumen = document.getElementById("resumenHistorial");
+
   tabla.innerHTML = `<tr><td colspan="5" class="text-muted">Cargando partidas...</td></tr>`;
+  resumen.textContent = "";
 
   try {
-    const res = await fetch(`https://eberaplicano.com/michi/partidas/${userId}/`);
+    const res = await fetch(`https://eberaplicano.com/michi/jugadores/${userId}/partidas/`);
     if (!res.ok) throw new Error(`Error ${res.status}`);
-    const data = await res.json();
 
-    if (!data.length) {
-      tabla.innerHTML = `<tr><td colspan="5" class="text-muted">No hay partidas registradas aún.</td></tr>`;
+    const data = await res.json();
+    const partidas = data.partidas || [];
+
+    if (!partidas.length) {
+      tabla.innerHTML = `<tr><td colspan="5" class="text-muted">No hay partidas registradas.</td></tr>`;
       return;
     }
 
-    tabla.innerHTML = data.map((p, i) => `
+    // 🧮 Mostrar resumen
+    resumen.innerHTML = `
+      <span class="badge bg-success me-2">Total: ${data.total_partidas}</span>
+      <span class="badge bg-primary me-2">${partidas.filter(p => p.resultado === "Victoria").length} Victorias</span>
+      <span class="badge bg-danger">${partidas.filter(p => p.resultado === "Derrota").length} Derrotas</span>
+    `;
+
+    // 🧩 Mostrar tabla
+    tabla.innerHTML = partidas.map((p, i) => `
       <tr>
         <td>${i + 1}</td>
         <td class="${p.resultado === 'Victoria' ? 'text-success fw-bold' : 'text-danger fw-bold'}">${p.resultado}</td>
@@ -79,10 +93,11 @@ document.getElementById("btnHistorial").addEventListener("click", async () => {
       </tr>
     `).join('');
   } catch (err) {
-    console.error(err);
-    tabla.innerHTML = `<tr><td colspan="5" class="text-danger">Error al cargar el historial.</td></tr>`;
+    console.error("❌ Error al cargar historial:", err);
+    tabla.innerHTML = `<tr><td colspan="5" class="text-danger">Error al cargar las partidas.</td></tr>`;
   }
 
-  const modal = new bootstrap.Modal(document.getElementById('modalHistorial'));
+  // Mostrar modal
+  const modal = new bootstrap.Modal(document.getElementById("modalHistorial"));
   modal.show();
 });
