@@ -38,10 +38,10 @@ document.getElementById('nombreJugador').textContent = username || "Jugador";
 document.getElementById('correoJugador').textContent = correo || "—";
 document.getElementById('navUserName').textContent = username || "Jugador";
 
-// 🐾 Icono aleatorio
+// Icono aleatorio
 document.getElementById('animalIcon').src = 'https://cdn-icons-png.flaticon.com/512/616/616430.png';
 
-// 🟠 Botones de Salir
+// Botones de Salir
 [document.getElementById('btnSalir'), document.getElementById('logoutBtn')].forEach(btn => {
   btn.addEventListener('click', () => {
     localStorage.clear();
@@ -49,7 +49,7 @@ document.getElementById('animalIcon').src = 'https://cdn-icons-png.flaticon.com/
   });
 });
 
-// 👁️ Mostrar / Ocultar contraseñas
+// Mostrar / Ocultar contraseñas
 function togglePassword(btnId, inputId) {
   const btn = document.getElementById(btnId);
   const input = document.getElementById(inputId);
@@ -62,7 +62,7 @@ function togglePassword(btnId, inputId) {
 togglePassword('toggleNew', 'nuevaPass');
 togglePassword('toggleConfirm', 'confirmPass');
 
-// 🟢 Cambiar nombre (Django + Firebase + Firestore)
+//Cambiar nombre (Django + Firebase + Firestore)
 document.getElementById('guardarNombre').addEventListener('click', async () => {
   const nuevoNombre = document.getElementById('nuevoNombre').value.trim();
   if (!nuevoNombre) return mostrarToast("Ingresa un nombre válido", "warning");
@@ -94,7 +94,7 @@ document.getElementById('guardarNombre').addEventListener('click', async () => {
   }
 });
 
-// 🟡 Cambiar contraseña
+//Cambiar contraseña
 document.getElementById('guardarPass').addEventListener('click', async () => {
   const nueva = document.getElementById('nuevaPass').value.trim();
   const confirm = document.getElementById('confirmPass').value.trim();

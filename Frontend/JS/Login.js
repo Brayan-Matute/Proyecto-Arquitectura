@@ -46,7 +46,7 @@ f.addEventListener('submit', async (e) => {
     let correoLogin = loginInput;
     let userDoc = null;
 
-    // Permitir login con nombre de usuario
+    //Permitir login con nombre de usuario
     if (!loginInput.includes("@")) {
       const q = query(collection(db, "usuarios"), where("nombre_usuario", "==", loginInput));
       const snap = await getDocs(q);
@@ -57,7 +57,7 @@ f.addEventListener('submit', async (e) => {
 
     const { user } = await signInWithEmailAndPassword(auth, correoLogin, pass.value);
 
-    // Verificar si ya está verificado
+    //Verificar si ya está verificado
     const ref = doc(db, "verificaciones", user.uid);
     const snap = await getDoc(ref);
     if (!snap.exists() || !snap.data().verificado) {
@@ -68,7 +68,7 @@ f.addEventListener('submit', async (e) => {
       return;
     }
 
-    // 🔥 Solicitud a tu API Django para obtener más datos
+    //Solicitud a tu API Django para obtener más datos
     const res = await fetch("https://eberaplicano.com/michi/login/", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -78,13 +78,13 @@ f.addEventListener('submit', async (e) => {
     const data = await res.json();
     if (!data.ok) throw new Error("Error al obtener datos del usuario.");
 
-    // Guardar en localStorage
+    //Guardar en localStorage
     localStorage.setItem('nombre_usuario', data.usuario.nombre_usuario); // para panel
     localStorage.setItem('username', data.usuario.nombre_usuario);       // para perfil
     localStorage.setItem('userId', data.usuario.id);                     // ID para stats
     localStorage.setItem('token', await user.getIdToken());
 
-    // Mostrar pantalla de carga antes del panel
+    //Mostrar pantalla de carga antes del panel
     window.location.href = '/Frontend/cargando_login.html';
 
 

@@ -27,7 +27,7 @@ body::before {
   z-index: 1;
 }
 
-/* 🎴 Tablero */
+/* Tablero */
 .board {
   display: grid;
   grid-template-columns: repeat(4, 110px);
@@ -40,7 +40,7 @@ body::before {
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
 
-/* 🃏 Cartas */
+/* Cartas */
 .card-container {
   perspective: 900px;
   cursor: pointer;
@@ -88,7 +88,7 @@ body::before {
   transform: rotateY(180deg);
 }
 
-/* 🕒 Contador de tiempo */
+/* Contador de tiempo */
 .contador-container {
   position: absolute;
   top: 4px;
@@ -118,7 +118,7 @@ body::before {
   box-shadow: 0 8px 0 #3e0b64, 0 10px 15px rgba(0, 0, 0, 0.4);
 }
 
-/* 🎵 Música + 💥 Intentos */
+/*  Música +  Intentos */
 .music-control {
   width: 100%;
   display: flex;
@@ -128,7 +128,7 @@ body::before {
   padding: 0 15px;
 }
 
-/* 💥 Caja de intentos */
+/* Caja de intentos */
 .intentos-box {
   background: linear-gradient(180deg, #f59e42 0%, #db4b05 100%);
   color: white;
@@ -141,7 +141,7 @@ body::before {
   font-family: 'Comic Sans MS', 'Fredoka One', cursive;
 }
 
-/* 🎵 Botón de música */
+/* Botón de música */
 .music-btn {
   background: linear-gradient(180deg, #775ee6 0%, #3246b6c5 100%);
   border: 3px solid #e6c59b;
@@ -166,7 +166,7 @@ body::before {
   box-shadow: 0 5px 0 #551414;
 }
 
-/* 🔙 Botón volver */
+/* Botón volver */
 .volver-superior {
   position: absolute;
   top: 15px;
@@ -193,7 +193,7 @@ body::before {
   box-shadow: 0 6px 0 #6e4300, 0 8px 12px rgba(0, 0, 0, 0.3);
 }
 
-/* 🔔 Toast */
+/* Toast */
 .toast {
   transform: translateX(20px);
   opacity: 0;
@@ -207,7 +207,7 @@ body::before {
   }
 }
 
-/* 📱 Ajuste responsive — mantener 4 columnas con tamaño fluido */
+/* Ajuste responsive — mantener 4 columnas con tamaño fluido */
 .board {
   grid-template-columns: repeat(4, minmax(clamp(65px, 10vw, 120px), 1fr));
   gap: clamp(6px, 1.2vw, 12px);
@@ -232,7 +232,7 @@ body::before {
   padding-bottom: 2rem;
 }
 
-/* 📲 Ajustes por tamaño de pantalla */
+/*Ajustes por tamaño de pantalla */
 @media (max-width: 768px) {
   .board {
     max-width: 90vw;

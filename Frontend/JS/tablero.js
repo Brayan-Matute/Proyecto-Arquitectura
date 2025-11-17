@@ -8,18 +8,18 @@ let musica;
 const musicaIniciada = localStorage.getItem("musica_iniciada") === "true";
 const jugadorId = localStorage.getItem("userId");
 
-// 🔊 Sonidos
+//Sonidos
 const sonidoCarta = new Audio("/Frontend/cartas-frontal/cartas.wav");
 const sonidoVictoria = new Audio("/Frontend/cartas-frontal/Win1.mp3");
 const sonidoDerrota = new Audio("/Frontend/cartas-frontal/perdio.mp3");
 
-// 📦 Reproduce sonido de carta
+//Reproduce sonido de carta
 function reproducirCarta() {
   sonidoCarta.currentTime = 0;
   sonidoCarta.play().catch(() => {});
 }
 
-// 🪄 Toasts visuales
+//Toasts visuales
 function mostrarToast(mensaje, tipo = "info") {
   const toastContainer = document.getElementById("toastContainer");
   const colores = {
@@ -44,7 +44,7 @@ function mostrarToast(mensaje, tipo = "info") {
   toast.addEventListener("hidden.bs.toast", () => toast.remove());
 }
 
-// 🎵 Música de fondo
+//Música de fondo
 if (musicaIniciada) {
   musica = new Audio("/Frontend/cartas-frontal/game_1mn12s_130bpm_STD.wav");
   musica.loop = true;
@@ -54,7 +54,7 @@ if (musicaIniciada) {
   }, 200);
 }
 
-// 🧩 Intentos según nivel
+//Intentos según nivel
 switch (nivel) {
   case "medio":
     intentos = 4;
@@ -69,7 +69,7 @@ switch (nivel) {
 const intentosSpan = document.getElementById("intentos");
 intentosSpan.textContent = intentos;
 
-// 🕒 Contador regresivo
+//Contador regresivo
 function iniciarContador() {
   if (!iniciado) {
     iniciado = true;
@@ -93,7 +93,7 @@ function detenerContador() {
   clearInterval(intervalo);
 }
 
-// 🎵 Botón de música
+//Botón de música
 const btnMusica = document.getElementById("btnMusica");
 btnMusica.addEventListener("click", () => {
   if (musica.paused) {
@@ -107,7 +107,7 @@ btnMusica.addEventListener("click", () => {
   }
 });
 
-// 🧩 Registrar partidas (API)
+//Registrar partidas (API)
 async function registrarPartida(resultado, tiempo, nivel) {
   const fechaActual = new Date().toISOString();
   const nivelesValidos = { facil: "Básico", medio: "Medio", dificil: "Avanzado" };
@@ -146,20 +146,20 @@ const cartas = [
   "cartas-frontal/cartasH-1.png", "cartas-frontal/cartasH-2.png"
 ];
 
-// 🔀 Barajar
+//Barajar
 for (let i = cartas.length - 1; i > 0; i--) {
   const j = Math.floor(Math.random() * (i + 1));
   [cartas[i], cartas[j]] = [cartas[j], cartas[i]];
 }
 
-// 🖼️ Asignar imágenes
+//Asignar imágenes
 const backs = document.querySelectorAll(".card-face.back img");
 backs.forEach((img, i) => (img.src = cartas[i]));
 
 const cards = document.querySelectorAll(".card");
 let flippedCards = [];
 
-// 👀 Mostrar todas las cartas 3s
+//Mostrar todas las cartas 3s
 function mostrarCartasTemporalmente() {
   cards.forEach(card => card.classList.add("flipped"));
   setTimeout(() => {
@@ -168,7 +168,7 @@ function mostrarCartasTemporalmente() {
   }, 3000);
 }
 
-// 🃏 Lógica de clic en cartas
+//Lógica de clic en cartas
 cards.forEach(card => {
   card.addEventListener("click", () => {
     reproducirCarta();
@@ -229,7 +229,7 @@ cards.forEach(card => {
   });
 });
 
-// 🐾 Dorsos aleatorios
+//Dorsos aleatorios
 const dorsos = [
   "cartas-frontal/cartas-01.png",
   "cartas-frontal/cartas-02.png",
@@ -256,5 +256,5 @@ fronts.forEach(front => {
   front.appendChild(img);
 });
 
-// 👀 Mostrar cartas al cargar
+//Mostrar cartas al cargar
 mostrarCartasTemporalmente();

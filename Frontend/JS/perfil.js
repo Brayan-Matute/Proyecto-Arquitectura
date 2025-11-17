@@ -54,7 +54,7 @@ function elegirIconoAleatorio() {
   });
 
 
-  // 🟢 Ver historial de partidas
+  //Ver historial de partidas
 document.getElementById("btnHistorial").addEventListener("click", async () => {
   const userId = localStorage.getItem("userId");
   const tabla = document.getElementById("tablaHistorial");
@@ -75,14 +75,14 @@ document.getElementById("btnHistorial").addEventListener("click", async () => {
       return;
     }
 
-    // 🧮 Mostrar resumen
+    //Mostrar resumen
     resumen.innerHTML = `
       <span class="badge bg-success me-2">Total: ${data.total_partidas}</span>
       <span class="badge bg-primary me-2">${partidas.filter(p => p.resultado === "Victoria").length} Victorias</span>
       <span class="badge bg-danger">${partidas.filter(p => p.resultado === "Derrota").length} Derrotas</span>
     `;
 
-    // 🧩 Mostrar tabla
+    //Mostrar tabla
     tabla.innerHTML = partidas.map((p, i) => `
       <tr>
         <td>${i + 1}</td>
@@ -93,7 +93,7 @@ document.getElementById("btnHistorial").addEventListener("click", async () => {
       </tr>
     `).join('');
   } catch (err) {
-    console.error("❌ Error al cargar historial:", err);
+    console.error("Error al cargar historial:", err);
     tabla.innerHTML = `<tr><td colspan="5" class="text-danger">Error al cargar las partidas.</td></tr>`;
   }
 

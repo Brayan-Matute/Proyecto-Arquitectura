@@ -1,7 +1,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
   import { getFirestore, doc, getDoc, updateDoc, setDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
 
-  // 🔥 Configuración Firebase
+  // Configuración Firebase
   const firebaseConfig = {
     apiKey: "AIzaSyAipEqvrKnyj0obYcu-WKgRLzEAEqlG0jg",
     authDomain: "login-arquitectura.firebaseapp.com",
@@ -25,7 +25,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebas
   const inp  = document.getElementById("codigo");
   const btnReenviar = document.getElementById("btnReenviar");
 
-  // 🧩 Funciones auxiliares
+  //Funciones auxiliares
   function flash(type, text){ 
     msg.className = `alert alert-${type}`; 
     msg.textContent = text; 
@@ -33,7 +33,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebas
   }
   function generarCodigo(){ return Math.floor(100000 + Math.random() * 900000).toString(); }
 
-  // ✅ Verificar código
+  //Verificar código
   form.addEventListener("submit", async (e) => {
     e.preventDefault(); 
     msg.classList.add("d-none");
@@ -49,7 +49,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebas
       const data = snap.data();
 
       if (data.codigo === code) {
-        await updateDoc(ref, { verificado: true, verificadoEn: serverTimestamp() }); // ✅ Solo actualiza, no borra
+        await updateDoc(ref, { verificado: true, verificadoEn: serverTimestamp() }); //Solo actualiza, no borra
         flash("success", "¡Cuenta verificada correctamente! Serás redirigido al login…");
         setTimeout(() => location.href = "/Frontend/login.html?verify=1", 1500);
       } else {
@@ -60,7 +60,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebas
     }
   });
 
-  // 🔁 Reenviar código
+  //Reenviar código
   let cooldown = false;
   btnReenviar.addEventListener("click", async () => {
     if (cooldown) return;

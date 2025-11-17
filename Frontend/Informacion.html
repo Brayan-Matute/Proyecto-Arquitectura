@@ -75,7 +75,7 @@
 </head>
 
 <body>
-  <!-- 🔹 Navbar -->
+  <!--Navbar -->
   <nav class="navbar navbar-expand-lg fixed-top">
     <div class="container-fluid">
       <button class="btn btn-menu me-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu">
@@ -88,7 +88,7 @@
     </div>
   </nav>
 
-  <!-- 🔹 Sidebar -->
+  <!--Sidebar -->
   <div class="offcanvas offcanvas-start" tabindex="-1" id="sidebarMenu">
     <div class="offcanvas-header">
       <h5 class="offcanvas-title"><i class="bi bi-controller me-2"></i>Menú Michi</h5>
@@ -106,7 +106,7 @@
     </div>
   </div>
 
-  <!-- 🔹 Contenido Principal -->
+  <!-- Contenido Principal -->
   <main class="container">
     <div class="info-card">
       <h1>🐾 Michi Match</h1>
@@ -142,21 +142,21 @@
     </div>
   </main>
 
-  <!-- 🪄 Toasts -->
+  <!-- Toasts -->
   <div id="toastContainer" class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1100;"></div>
 
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
   <script>
-    // 🟢 Mostrar nombre del jugador
+    // Mostrar nombre del jugador
     const nombre = localStorage.getItem('nombre_usuario');
     if (!nombre) {
       setTimeout(() => window.location.href = "/Frontend/login.html", 1000);
     }
     document.getElementById('navUserName').textContent = nombre;
 
-    // 🔴 Cerrar sesión
+    // Cerrar sesión
     document.getElementById('btnSalir').addEventListener('click', () => {
       localStorage.clear();
       window.location.href = "/Frontend/login.html";
